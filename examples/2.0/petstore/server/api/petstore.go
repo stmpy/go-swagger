@@ -59,7 +59,7 @@ var createPet = runtime.OperationHandlerFunc(func(data interface{}) (interface{}
 		return nil, err
 	}
 	addPet(pet)
-	return body, nil
+	return swag.ToDynamicJSON(pet), nil
 })
 
 var deletePet = runtime.OperationHandlerFunc(func(data interface{}) (interface{}, error) {
@@ -108,6 +108,7 @@ func addPet(pet Pet) {
 	petsLock.Lock()
 	defer petsLock.Unlock()
 	pet.ID = newPetID()
+	fmt.Printf("%#v\n", pet.ID)
 	pets = append(pets, pet)
 }
 
@@ -305,7 +306,6 @@ var swaggerJSON = `{
   "definitions": {
     "pet": {
       "required": [
-        "id",
         "name"
       ],
       "properties": {

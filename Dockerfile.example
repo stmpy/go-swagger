@@ -1,0 +1,12 @@
+FROM golang as build
+
+COPY . src/
+
+RUN cd src/examples/2.0/petstore/server \
+  && go build
+
+FROM ubuntu
+
+COPY --from=build /go/src/examples/2.0/petstore/server/server .
+
+CMD ["./server"]
