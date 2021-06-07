@@ -58,7 +58,7 @@ var createPet = runtime.OperationHandlerFunc(func(data interface{}) (interface{}
 	if err := swag.FromDynamicJSON(body, &pet); err != nil {
 		return nil, err
 	}
-	addPet(pet)
+	addPet(&pet)
 	return swag.ToDynamicJSON(pet), nil
 })
 
@@ -104,12 +104,11 @@ func newPetID() int64 {
 	return atomic.AddInt64(&lastPetID, 1)
 }
 
-func addPet(pet Pet) {
+func addPet(pet *Pet) {
 	petsLock.Lock()
 	defer petsLock.Unlock()
 	pet.ID = newPetID()
-	fmt.Printf("%#v\n", pet.ID)
-	pets = append(pets, pet)
+	pets = append(pets, *pet)
 }
 
 func removePet(id int64) {
