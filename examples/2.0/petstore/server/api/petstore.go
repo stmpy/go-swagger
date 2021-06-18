@@ -163,10 +163,7 @@ var swaggerJSON = `{
         "description": "Returns all pets from the system that the user has access to",
         "operationId": "findPets",
         "produces": [
-          "application/json",
-          "application/xml",
-          "text/xml",
-          "text/html"
+          "application/json"
         ],
         "parameters": [
           {
