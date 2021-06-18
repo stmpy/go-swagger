@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petstore-server
+  labels:
+    app: petstore-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petstore-server
+  template:
+    metadata:
+      labels:
+        app: petstore-server
+    spec:
+      containers:
+      - name: server
+        image: stmpy/petstore-server:demo
+        ports:
+        - containerPort: 8344
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petstore-docs
+  labels:
+    app: petstore-docs
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: petstore-docs
+  template:
+    metadata:
+      labels:
+        app: petstore-docs
+    spec:
+      containers:
+      - name: docs
+        image: stmpy/petstore-docs:demo 
+        ports:
+        - containerPort: 8080
