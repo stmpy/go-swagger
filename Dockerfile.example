@@ -1,8 +1,15 @@
 FROM golang as build
 
-COPY . src/
+WORKDIR /go/src
 
-RUN cd src/examples/2.0/petstore/server \
+COPY go.mod .
+COPY go.sum .
+
+RUN go mod download
+
+COPY . .
+
+RUN cd examples/2.0/petstore/server \
   && go build
 
 FROM ubuntu
