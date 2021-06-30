@@ -14,6 +14,6 @@ RUN cd examples/2.0/petstore/server \
 
 FROM ubuntu
 
-COPY --from=build /go/src/examples/2.0/petstore/server/server .
+COPY --from=build /go/src/examples/2.0/petstore/server/api/swagger.json /go/src/examples/2.0/petstore/server/server ./
 
 CMD ["./server"]

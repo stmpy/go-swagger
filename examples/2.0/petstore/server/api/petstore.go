@@ -17,6 +17,7 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"sync"
 	"sync/atomic"
@@ -132,10 +133,12 @@ func petByID(id int64) (*Pet, error) {
 	return nil, errors.NotFound("not found: pet %d", id)
 }
 
-
-var b, err = ioutil.ReadFile("swagger.json") // just pass the file name
-if err != nil {
-    fmt.Print(err)
+func loadfile(filename string) []byte {
+	var b, err = ioutil.ReadFile(filename) // just pass the file name
+	if err != nil {
+		fmt.Print(err)
+	}
+	return b
 }
 
-var swaggerJSON = string(b) // convert content to a 'string'
+var swaggerJSON = string(loadfile("./swagger.json")) // convert content to a 'string'

@@ -179,7 +179,8 @@
           "type": "string"
         },
         "tags": {
-          "type": "array"
+          "type": "array",
+          "format": "string"
         },
         "status": {
           "type": "string"
@@ -187,7 +188,7 @@
       }
     },
     "petInput": {
-      "allOf": [
+      "anyOf": [
         {
           "$ref": "#/definitions/pet"
         },
@@ -199,6 +200,9 @@
             "id": {
               "type": "integer",
               "format": "int64"
+            },
+            "name": {
+              "type": "string"
             },
             "status": {
               "type": "string"
